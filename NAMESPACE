@@ -1,0 +1,5 @@
+
+export(aws24HourDataStatus)
+export(awsDataAvailabilityIDs)
+export(awsDataAvailabilityNet)
+export(awsDataAvailabilityAll)
