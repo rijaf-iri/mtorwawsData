@@ -13,7 +13,9 @@ aws24HourDataStatus <- function(url){
     url <- paste0(url, "/aws24HourDataStatus")
     req <- curl::curl_fetch_memory(url)
 
-    jsonlite::fromJSON(rawToChar(req$content))
+    out <- jsonlite::fromJSON(rawToChar(req$content))
+    class(out) <- append(class(out), "awsDataStatus")
+    return(out)
 }
 
 #' AWS data availability.
@@ -42,7 +44,9 @@ awsDataAvailabilityIDs <- function(start_time, end_time, aws_ids, url){
     url <- paste0(url, "/awsDataAvailabilityIDs")
     req <- curl::curl_fetch_memory(url, handle = handle)
 
-    jsonlite::fromJSON(rawToChar(req$content))
+    out <- jsonlite::fromJSON(rawToChar(req$content))
+    class(out) <- append(class(out), "awsDataAvailabilityByID")
+    return(out)
 }
 
 #' AWS data availability.
@@ -66,7 +70,9 @@ awsDataAvailabilityNet <- function(start_time, end_time, aws_net, url){
     url <- utils::URLencode(url)
     req <- curl::curl_fetch_memory(url)
 
-    jsonlite::fromJSON(rawToChar(req$content))
+    out <- jsonlite::fromJSON(rawToChar(req$content))
+    class(out) <- append(class(out), "awsDataAvailabilityByID")
+    return(out)
 }
 
 #' AWS data availability.
@@ -88,5 +94,7 @@ awsDataAvailabilityAll <- function(start_time, end_time, url){
     url <- utils::URLencode(url)
     req <- curl::curl_fetch_memory(url)
 
-    jsonlite::fromJSON(rawToChar(req$content))
+    out <- jsonlite::fromJSON(rawToChar(req$content))
+    class(out) <- append(class(out), "awsDataAvailabilityByNET")
+    return(out)
 }
