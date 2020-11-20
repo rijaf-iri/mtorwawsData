@@ -4,3 +4,8 @@ export(awsDataAvailabilityIDs)
 export(awsDataAvailabilityNet)
 export(awsDataAvailabilityAll)
 export(awsCheckVariablesIDs)
+
+export(awsGetMetadata)
+export(awsGetDataAggregateIDs)
+export(awsGetDataMinVarsIDs)
+
