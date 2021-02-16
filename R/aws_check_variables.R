@@ -27,6 +27,11 @@ awsCheckVariablesIDs <- function(start_time, end_time, aws_ids, variables, url){
     url <- paste0(url, "/awsCheckVariablesIDs")
     req <- curl::curl_fetch_memory(url, handle = handle)
 
+    if(req$status_code != 200){
+        cat("An error has occurred\n")
+        return(rawToChar(req$content))
+    }
+
     out <- jsonlite::fromJSON(rawToChar(req$content))
     class(out) <- append(class(out), "awsCheckVariables")
     return(out)

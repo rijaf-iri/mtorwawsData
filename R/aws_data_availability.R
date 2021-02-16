@@ -13,6 +13,11 @@ aws24HourDataStatus <- function(url){
     url <- paste0(url, "/aws24HourDataStatus")
     req <- curl::curl_fetch_memory(url)
 
+    if(req$status_code != 200){
+        cat("An error has occurred\n")
+        return(rawToChar(req$content))
+    }
+
     out <- jsonlite::fromJSON(rawToChar(req$content))
     class(out) <- append(class(out), "awsDataStatus")
     return(out)
@@ -44,6 +49,11 @@ awsDataAvailabilityIDs <- function(start_time, end_time, aws_ids, url){
     url <- paste0(url, "/awsDataAvailabilityIDs")
     req <- curl::curl_fetch_memory(url, handle = handle)
 
+    if(req$status_code != 200){
+        cat("An error has occurred\n")
+        return(rawToChar(req$content))
+    }
+
     out <- jsonlite::fromJSON(rawToChar(req$content))
     class(out) <- append(class(out), "awsDataAvailabilityByID")
     return(out)
@@ -70,6 +80,11 @@ awsDataAvailabilityNet <- function(start_time, end_time, aws_net, url){
     url <- utils::URLencode(url)
     req <- curl::curl_fetch_memory(url)
 
+    if(req$status_code != 200){
+        cat("An error has occurred\n")
+        return(rawToChar(req$content))
+    }
+
     out <- jsonlite::fromJSON(rawToChar(req$content))
     class(out) <- append(class(out), "awsDataAvailabilityByID")
     return(out)
@@ -93,6 +108,11 @@ awsDataAvailabilityAll <- function(start_time, end_time, url){
     url <- urltools::param_set(url, key = "end_time", value = end_time)
     url <- utils::URLencode(url)
     req <- curl::curl_fetch_memory(url)
+
+    if(req$status_code != 200){
+        cat("An error has occurred\n")
+        return(rawToChar(req$content))
+    }
 
     out <- jsonlite::fromJSON(rawToChar(req$content))
     class(out) <- append(class(out), "awsDataAvailabilityByNET")
